@@ -1,0 +1,36 @@
+{
+  "name": "veramo-plugin",
+  "version": "1.0.0",
+  "source": "src/index.ts",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "veramo": {
+    "pluginInterfaces": {
+      "IMyAgentPlugin": "./src/types/IMyAgentPlugin.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "generate-plugin-schema": "yarn veramo dev generate-plugin-schema",
+    "start": "veramo server",
+    "watch": "tsc -b --watch",
+    "clean": "rm -rf tmp && rm database.sqlite && rm -rf build && rm tsconfig.tsbuildinfo",
+    "upgrade-veramo": "yarn add -D @veramo/cli @veramo/core @veramo/did-manager @veramo/key-manager"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@veramo/cli": "^1.0.1",
+    "@veramo/core": "^1.0.1",
+    "@veramo/did-manager": "^1.0.1",
+    "@veramo/key-manager": "^1.0.1",
+    "typescript": "^4.0.5"
+  },
+  "files": [
+    "build/**/*",
+    "src/**/*",
+    "README.md",
+    "plugin-schema.json",
+    "LICENSE"
+  ],
+  "dependencies": {}
+}
