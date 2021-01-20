@@ -17,5 +17,5 @@
     "outDir": "build"
   },
   "exclude": ["**/__tests__/**/*", "**/build/**/*"],
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "decs.d.ts"]
 }
