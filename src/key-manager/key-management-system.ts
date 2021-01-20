@@ -25,6 +25,17 @@ export class KeyManagementSystem extends AbstractKeyManagementSystem {
     );
   });
 
+  private EcdsaPubKey = asn1.define('EcdsaPubKey', function(this: any) {
+    // parsing this according to https://tools.ietf.org/html/rfc5480#section-2
+    this.seq().obj( 
+        this.key('algo').seq().obj(
+            this.key('a').objid(),
+            this.key('b').objid(),
+        ),
+        this.key('pubKey').bitstr()
+    );
+});
+
   leftpad(data: string, size = 64): string {
     if (data.length === size) return data
     return '0'.repeat(size - data.length) + data
@@ -39,8 +50,11 @@ export class KeyManagementSystem extends AbstractKeyManagementSystem {
           break
         case 'Secp256k1':
           const result = await this.kms.createKey({KeyUsage: "SIGN_VERIFY", CustomerMasterKeySpec: "ECC_SECG_P256K1"})
-          const publicKey = await this.kms.getPublicKey({ KeyId: result.KeyMetadata?.KeyId})
-          key = {"kid": result.KeyMetadata?.KeyId || "kid", "type": type, "publicKeyHex": publicKey.PublicKey?.toString() || "publicKeyHex"};
+          const publicKeyDER = await this.kms.getPublicKey({ KeyId: result.KeyMetadata?.KeyId})
+
+          const publicKey = this.EcdsaPubKey.decode(Buffer.from(publicKeyDER.PublicKey!))
+
+          key = {"kid": result.KeyMetadata?.KeyId || "kid", "type": type, "publicKeyHex": publicKey.pubKey.data.toString('hex') || "publicKeyHex"};
           break
         default:
           throw Error('Key type not supported: ' + type)
