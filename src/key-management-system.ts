@@ -1,20 +1,24 @@
 import { TKeyType, IKey, EcdsaSignature } from '@veramo/core'
 import { AbstractKeyManagementSystem } from '@veramo/key-manager'
 import { KMS } from "@aws-sdk/client-kms"
+import { Credentials } from "@aws-sdk/types"
 import { hash } from '@stablelib/sha256'
 import * as asn1 from 'asn1.js';
+
+export interface KeyManagementSystemOptions extends Credentials {
+  region: string,
+  apiVersion: string,
+}
+
 /**
  * @alpha
  */
 export class KeyManagementSystem extends AbstractKeyManagementSystem {
   private kms: KMS;
 
-  constructor() {
+  constructor(options: KeyManagementSystemOptions) {
     super();
-    this.kms = new KMS({
-      region: 'us-east-1',
-      apiVersion: '2014-11-01'
-    })
+    this.kms = new KMS(options)
   }
 
   private EcdsaSigAsnParse = asn1.define('EcdsaSig', function(this: any) {
@@ -29,12 +33,12 @@ export class KeyManagementSystem extends AbstractKeyManagementSystem {
     // parsing this according to https://tools.ietf.org/html/rfc5480#section-2
     this.seq().obj( 
         this.key('algo').seq().obj(
-            this.key('a').objid(),
-            this.key('b').objid(),
+            this.key('algorithm').objid(),
+            this.key('parameters').objid(),
         ),
         this.key('pubKey').bitstr()
     );
-});
+  });
 
   leftpad(data: string, size = 64): string {
     if (data.length === size) return data
@@ -51,9 +55,7 @@ export class KeyManagementSystem extends AbstractKeyManagementSystem {
         case 'Secp256k1':
           const result = await this.kms.createKey({KeyUsage: "SIGN_VERIFY", CustomerMasterKeySpec: "ECC_SECG_P256K1"})
           const publicKeyDER = await this.kms.getPublicKey({ KeyId: result.KeyMetadata?.KeyId})
-
           const publicKey = this.EcdsaPubKey.decode(Buffer.from(publicKeyDER.PublicKey!))
-
           key = {"kid": result.KeyMetadata?.KeyId || "kid", "type": type, "publicKeyHex": publicKey.pubKey.data.toString('hex') || "publicKeyHex"};
           break
         default:
@@ -101,8 +103,6 @@ export class KeyManagementSystem extends AbstractKeyManagementSystem {
       s: this.leftpad(sigDecoded.s.toString('hex')),
       recoveryParam: 1
     }
-    //return result
-    throw Error('KeyManagementSystem signJWT not implemented')
   }
 
 }

@@ -111,7 +111,10 @@ agent:
                 local:
                   $require: '@veramo/kms-local#KeyManagementSystem'
                 my:
-                  $require: ./build#KeyManagementSystem
+                  $require: './build#KeyManagementSystem'
+                  $args:
+                    - region: us-east-1
+                      apiVersion: '2014-11-01'
         - $require: '@veramo/did-manager#DIDManager'
           $args:
             - store:
@@ -120,14 +123,10 @@ agent:
                   - $ref: /dbConnection
               defaultProvider: did:ethr:rinkeby
               providers:
-                did:my:
-                  $require: ./build#IdentifierProvider
-                  $args:
-                    - defaultKms: local
                 did:ethr:
                   $require: '@veramo/did-provider-ethr#EthrDIDProvider'
                   $args:
-                    - defaultKms: local
+                    - defaultKms: my
                       network: mainnet
                       rpcUrl: https://mainnet.infura.io/v3/5ffc47f65c4042ce847ef66a3fa70d4c
                       gas: 1000001
@@ -135,7 +134,7 @@ agent:
                 did:ethr:rinkeby:
                   $require: '@veramo/did-provider-ethr#EthrDIDProvider'
                   $args:
-                    - defaultKms: local
+                    - defaultKms: my
                       network: rinkeby
                       rpcUrl: https://rinkeby.infura.io/v3/5ffc47f65c4042ce847ef66a3fa70d4c
                       gas: 1000001
@@ -143,7 +142,7 @@ agent:
                 did:ethr:ropsten:
                   $require: '@veramo/did-provider-ethr#EthrDIDProvider'
                   $args:
-                    - defaultKms: local
+                    - defaultKms: my
                       network: ropsten
                       rpcUrl: https://ropsten.infura.io/v3/5ffc47f65c4042ce847ef66a3fa70d4c
                       gas: 1000001
@@ -151,7 +150,7 @@ agent:
                 did:ethr:kovan:
                   $require: '@veramo/did-provider-ethr#EthrDIDProvider'
                   $args:
-                    - defaultKms: local
+                    - defaultKms: my
                       network: kovan
                       rpcUrl: https://kovan.infura.io/v3/5ffc47f65c4042ce847ef66a3fa70d4c
                       gas: 1000001
@@ -159,7 +158,7 @@ agent:
                 did:ethr:goerli:
                   $require: '@veramo/did-provider-ethr#EthrDIDProvider'
                   $args:
-                    - defaultKms: local
+                    - defaultKms: my
                       network: goerli
                       rpcUrl: https://goerli.infura.io/v3/5ffc47f65c4042ce847ef66a3fa70d4c
                       gas: 1000001
@@ -167,7 +166,7 @@ agent:
                 did:web:
                   $require: '@veramo/did-provider-web#WebDIDProvider'
                   $args:
-                    - defaultKms: local
+                    - defaultKms: my
         - $require: '@veramo/did-resolver#DIDResolverPlugin'
           $args:
             - resolver:
@@ -182,4 +181,3 @@ agent:
         - $require: '@veramo/did-comm#DIDComm'
         - $require: '@veramo/credential-w3c#CredentialIssuer'
         - $require: '@veramo/selective-disclosure#SelectiveDisclosure'
-        - $require: ./build#MyAgentPlugin

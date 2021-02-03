@@ -1,14 +1,9 @@
 {
-  "name": "veramo-plugin",
+  "name": "veramo-aws-kms",
   "version": "1.0.0",
   "source": "src/index.ts",
   "main": "build/index.js",
   "types": "build/index.d.ts",
-  "veramo": {
-    "pluginInterfaces": {
-      "IMyAgentPlugin": "./src/types/IMyAgentPlugin.ts"
-    }
-  },
   "scripts": {
     "build": "tsc",
     "generate-plugin-schema": "yarn veramo dev generate-plugin-schema",
@@ -17,10 +12,13 @@
     "clean": "rm -rf tmp && rm database.sqlite && rm -rf build && rm tsconfig.tsbuildinfo",
     "upgrade-veramo": "yarn add -D @veramo/cli @veramo/core @veramo/did-manager @veramo/key-manager"
   },
-  "license": "MIT",
+  "dependencies": {
+    "@aws-sdk/client-kms": "^3.2.0",
+    "asn1.js": "^5.4.1"
+  },
   "devDependencies": {
     "@aws-sdk/types": "3.1.0",
-    "@veramo/cli": "^1.0.1",
+    "@veramo/cli": "^1.0.2-next.15",
     "@veramo/core": "^1.0.1",
     "@veramo/did-manager": "^1.0.1",
     "@veramo/key-manager": "^1.0.1",
@@ -30,11 +28,6 @@
     "build/**/*",
     "src/**/*",
     "README.md",
-    "plugin-schema.json",
     "LICENSE"
-  ],
-  "dependencies": {
-    "@aws-sdk/client-kms": "^3.2.0",
-    "asn1.js": "^5.4.1"
-  }
+  ]
 }
