@@ -6,7 +6,6 @@
   "types": "build/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "generate-plugin-schema": "yarn veramo dev generate-plugin-schema",
     "start": "veramo server",
     "watch": "tsc -b --watch",
     "clean": "rm -rf tmp && rm database.sqlite && rm -rf build && rm tsconfig.tsbuildinfo",
@@ -18,10 +17,10 @@
   },
   "devDependencies": {
     "@aws-sdk/types": "3.1.0",
-    "@veramo/cli": "^1.0.2-next.15",
-    "@veramo/core": "^1.0.1",
-    "@veramo/did-manager": "^1.0.1",
-    "@veramo/key-manager": "^1.0.1",
+    "@veramo/cli": "^1.1.0",
+    "@veramo/core": "^1.1.0",
+    "@veramo/did-manager": "^1.1.0",
+    "@veramo/key-manager": "^1.1.0",
     "typescript": "^4.0.5"
   },
   "files": [
