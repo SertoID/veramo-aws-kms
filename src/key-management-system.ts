@@ -5,9 +5,11 @@ import { Credentials } from "@aws-sdk/types"
 import { hash } from '@stablelib/sha256'
 import * as asn1 from 'asn1.js';
 
-export interface KeyManagementSystemOptions extends Credentials {
+export interface KeyManagementSystemOptions {
   region: string,
   apiVersion: string,
+  accessKeyId?: string,
+  secretAccessKey?: string
 }
 
 /**

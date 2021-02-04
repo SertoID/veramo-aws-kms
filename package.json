@@ -1,5 +1,5 @@
 {
-  "name": "veramo-aws-kms",
+  "name": "@sertoid/veramo-aws-kms",
   "version": "1.0.0",
   "source": "src/index.ts",
   "main": "build/index.js",
@@ -24,9 +24,6 @@
     "typescript": "^4.0.5"
   },
   "files": [
-    "build/**/*",
-    "src/**/*",
-    "README.md",
-    "LICENSE"
+    "build/**/*"
   ]
 }
