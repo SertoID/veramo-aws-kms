@@ -13,7 +13,7 @@ import { KeyManagementSystem } from '@sertoid/veramo-aws-kms'
 new KeyManager({
   store: new KeyStore(dbConnection),
   kms: {
-    aws: new AwsKms({ region: 'us-east-2', apiVersion: '2014-11-01', accessKeyId: "", secretAccessKey: "" })
+    aws: new KeyManagementSystem({ region: 'us-east-2', apiVersion: '2014-11-01', accessKeyId: "", secretAccessKey: "" })
   },
 })
 
