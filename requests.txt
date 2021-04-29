@@ -1,0 +1,38 @@
+curl --request POST https://fc14e377816f.ngrok.io/agent/createVerifiableCredential \
+--header 'Content-Type: application/json' \
+--data-raw '{ "credential": {"@context":["https://www.w3.org/2018/credentials/v1"], "type":["VerifiableCredential"], "issuer":{"id": "did:ethr:rinkeby:0x38787097e8c6f88989e62eeecde0537eeec0823a"}, "issuanceDate":"2010-01-01T19:73:24Z", "credentialSubject": {"id": "did:example:user", "community":{ "rank": "rockstar"}}, "proof":{"type":"RsaSignature2018", "created":"2017-06-18T21:19:10Z", "proofPurpose":"assertionMethod","verificationMethod":"https://example.edu/issuers/keys/1", "jws":"eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM"}}, "save":"true"}'
+
+
+
+curl --request POST https://6052bf20cde8.ngrok.io/agent/handleMessage \
+--header 'Content-Type: application/json' \
+--data-raw '{ "raw": "eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NksifQ.eyJ2YyI6eyJjcmVkZW50aWFsU3ViamVjdCI6eyJjb21tdW5pdHkiOnsicmFuayI6InJvY2tzdGFyIn19LCJAY29udGV4dCI6WyJodHRwczovL3d3dy53My5vcmcvMjAxOC9jcmVkZW50aWFscy92MSJdLCJ0eXBlIjpbIlZlcmlmaWFibGVDcmVkZW50aWFsIl19LCJpc3N1YW5jZURhdGUiOiIyMDEwLTAxLTAxVDE5OjczOjI0WiIsInByb29mIjp7InR5cGUiOiJSc2FTaWduYXR1cmUyMDE4IiwiY3JlYXRlZCI6IjIwMTctMDYtMThUMjE6MTk6MTBaIiwicHJvb2ZQdXJwb3NlIjoiYXNzZXJ0aW9uTWV0aG9kIiwidmVyaWZpY2F0aW9uTWV0aG9kIjoiaHR0cHM6Ly9leGFtcGxlLmVkdS9pc3N1ZXJzL2tleXMvMSIsImp3cyI6ImV5SmhiR2NpT2lKU1V6STFOaUlzSW1JMk5DSTZabUZzYzJVc0ltTnlhWFFpT2xzaVlqWTBJbDE5Li5UQ1l0NVhzSVRKWDFDeFBDVDh5QVYtVFZrSUVxX1BiQ2hPTXFzTGZSb1BzbnNndzVXRXV0czAxbXEtcFF5N1VKaU41bWdSeEQtV1VjWDE2ZFVFTUdsdjUwYXF6cHFoNFFrdGIzcmstQnVReTcySUZMT3FWMEdfelMyNDUta3JvbktiNzhjUE4yNURHbGNUd0x0alBBWXVOelZCQWg0dkdIU3JReUhVZEJCUE0ifSwic3ViIjoiZGlkOmV4YW1wbGU6dXNlciIsImlzcyI6ImRpZDpldGhyOnJpbmtlYnk6MHhjZDkxMzU1ZmJlYmMyOWY1Y2JlNmNkY2I0NDU4ZDRjNTQ3MGVjZmNjIn0.eg4xOFD8wqyfPASCndZXx9J6HO--kGSgwDs5btIbVo-ykCZ7HkNt6CAqVEdmuyT0hDsLQV-AYf2QxwfQOs7CIg" }'
+
+
+curl --request POST  https://ec2-3-23-17-171.us-east-2.compute.amazonaws.com:3332/agent/didManagerCreate \
+--header 'Content-Type: application/json' \
+--data-raw '{ "alias": "myDid" }'
+
+curl --request POST https://e3816fb2aca5.ngrok.io/agent/didManagerCreate \
+--header 'Content-Type: application/json' \
+--data-raw '{ "alias": "myDid" }'
+
+curl --request POST https://e3816fb2aca5.ngrok.io/agent/didManagerGet
+
+{
+"raw":"eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NksifQ.eyJ2YyI6eyJjcmVkZW50aWFsU3ViamVjdCI6eyJjb21tdW5pdHkiOnsicmFuayI6InJvY2tzdGFyIn19LCJAY29udGV4dCI6WyJodHRwczovL3d3dy53My5vcmcvMjAxOC9jcmVkZW50aWFscy92MSJdLCJ0eXBlIjpbIlZlcmlmaWFibGVDcmVkZW50aWFsIl19LCJpc3N1YW5jZURhdGUiOiIyMDEwLTAxLTAxVDE5OjczOjI0WiIsInByb29mIjp7InR5cGUiOiJSc2FTaWduYXR1cmUyMDE4IiwiY3JlYXRlZCI6IjIwMTctMDYtMThUMjE6MTk6MTBaIiwicHJvb2ZQdXJwb3NlIjoiYXNzZXJ0aW9uTWV0aG9kIiwidmVyaWZpY2F0aW9uTWV0aG9kIjoiaHR0cHM6Ly9leGFtcGxlLmVkdS9pc3N1ZXJzL2tleXMvMSIsImp3cyI6ImV5SmhiR2NpT2lKU1V6STFOaUlzSW1JMk5DSTZabUZzYzJVc0ltTnlhWFFpT2xzaVlqWTBJbDE5Li5UQ1l0NVhzSVRKWDFDeFBDVDh5QVYtVFZrSUVxX1BiQ2hPTXFzTGZSb1BzbnNndzVXRXV0czAxbXEtcFF5N1VKaU41bWdSeEQtV1VjWDE2ZFVFTUdsdjUwYXF6cHFoNFFrdGIzcmstQnVReTcySUZMT3FWMEdfelMyNDUta3JvbktiNzhjUE4yNURHbGNUd0x0alBBWXVOelZCQWg0dkdIU3JReUhVZEJCUE0ifSwic3ViIjoiZGlkOmV4YW1wbGU6dXNlciIsImlzcyI6ImRpZDpldGhyOnJpbmtlYnk6MHhjZDkxMzU1ZmJlYmMyOWY1Y2JlNmNkY2I0NDU4ZDRjNTQ3MGVjZmNjIn0.eg4xOFD8wqyfPASCndZXx9J6HO--kGSgwDs5btIbVo-ykCZ7HkNt6CAqVEdmuyT0hDsLQV-AYf2QxwfQOs7CIg",
+"metaData":[{
+  "type":"JWT",
+  "value":"ES256K"
+}],
+"data":{
+  "vc":{
+    "credentialSubject":{
+      "community":{
+        "rank":"rockstar"
+      }},
+    "@context":["https://www.w3.org/2018/credentials/v1"],
+    "type":["VerifiableCredential"]},
+    "issuanceDate":"2010-01-01T19:73:24Z",
+    "proof":{
+      "type":"RsaSignature2018","created":"2017-06-18T21:19:10Z","proofPurpose":"assertionMethod","verificationMethod":"https://example.edu/issuers/keys/1","jws":"eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM"},"sub":"did:example:user","iss":"did:ethr:rinkeby:0xcd91355fbebc29f5cbe6cdcb4458d4c5470ecfcc"},"id":"3c33df7453a51e562b41fcd84e59c211d7970cfec52e13e0f78f118903be635a4ffe9dc7ea73272d2ab6951305adf2f66a176c103f2eab2d5cbd858b5ebc1f70","type":"w3c.vc","from":"did:ethr:rinkeby:0xcd91355fbebc29f5cbe6cdcb4458d4c5470ecfcc","to":"did:example:user","createdAt":"2010-01-01T19:73:24Z","credentials":[{"issuanceDate":"2010-01-01T19:73:24Z","proof":{"type":"JwtProof2020","jwt":"eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NksifQ.eyJ2YyI6eyJjcmVkZW50aWFsU3ViamVjdCI6eyJjb21tdW5pdHkiOnsicmFuayI6InJvY2tzdGFyIn19LCJAY29udGV4dCI6WyJodHRwczovL3d3dy53My5vcmcvMjAxOC9jcmVkZW50aWFscy92MSJdLCJ0eXBlIjpbIlZlcmlmaWFibGVDcmVkZW50aWFsIl19LCJpc3N1YW5jZURhdGUiOiIyMDEwLTAxLTAxVDE5OjczOjI0WiIsInByb29mIjp7InR5cGUiOiJSc2FTaWduYXR1cmUyMDE4IiwiY3JlYXRlZCI6IjIwMTctMDYtMThUMjE6MTk6MTBaIiwicHJvb2ZQdXJwb3NlIjoiYXNzZXJ0aW9uTWV0aG9kIiwidmVyaWZpY2F0aW9uTWV0aG9kIjoiaHR0cHM6Ly9leGFtcGxlLmVkdS9pc3N1ZXJzL2tleXMvMSIsImp3cyI6ImV5SmhiR2NpT2lKU1V6STFOaUlzSW1JMk5DSTZabUZzYzJVc0ltTnlhWFFpT2xzaVlqWTBJbDE5Li5UQ1l0NVhzSVRKWDFDeFBDVDh5QVYtVFZrSUVxX1BiQ2hPTXFzTGZSb1BzbnNndzVXRXV0czAxbXEtcFF5N1VKaU41bWdSeEQtV1VjWDE2ZFVFTUdsdjUwYXF6cHFoNFFrdGIzcmstQnVReTcySUZMT3FWMEdfelMyNDUta3JvbktiNzhjUE4yNURHbGNUd0x0alBBWXVOelZCQWg0dkdIU3JReUhVZEJCUE0ifSwic3ViIjoiZGlkOmV4YW1wbGU6dXNlciIsImlzcyI6ImRpZDpldGhyOnJpbmtlYnk6MHhjZDkxMzU1ZmJlYmMyOWY1Y2JlNmNkY2I0NDU4ZDRjNTQ3MGVjZmNjIn0.eg4xOFD8wqyfPASCndZXx9J6HO--kGSgwDs5btIbVo-ykCZ7HkNt6CAqVEdmuyT0hDsLQV-AYf2QxwfQOs7CIg"},"credentialSubject":{"community":{"rank":"rockstar"},"id":"did:example:user"},"issuer":{"id":"did:ethr:rinkeby:0xcd91355fbebc29f5cbe6cdcb4458d4c5470ecfcc"},"type":["VerifiableCredential"],"@context":["https://www.w3.org/2018/credentials/v1"]}]}

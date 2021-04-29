@@ -1,9 +1,8 @@
-import { TKeyType, IKey, EcdsaSignature } from '@veramo/core'
+import { TKeyType, IKey } from '@veramo/core'
 import { AbstractKeyManagementSystem } from '@veramo/key-manager'
 import { KMS } from "@aws-sdk/client-kms"
-import { Credentials } from "@aws-sdk/types"
-import { hash } from '@stablelib/sha256'
 import * as asn1 from 'asn1.js';
+import { toJose } from "./util";
 
 export interface KeyManagementSystemOptions {
   region: string,
@@ -93,18 +92,18 @@ export class KeyManagementSystem extends AbstractKeyManagementSystem {
     throw Error('KeyManagementSystem signEthTX not implemented')
   }
 
-  async signJWT({ key, data }: { key: IKey; data: string }): Promise<EcdsaSignature> {
+  async signJWT({ key, data }: { key: IKey; data: string }): Promise<string> {
     const enc = new TextEncoder()
     const result = await this.kms.sign({ KeyId: key.kid, Message: enc.encode(data), SigningAlgorithm: "ECDSA_SHA_256"})
     if(!result.Signature) throw Error("sig undefined")
     const sig = result.Signature
     const sigDecoded = this.EcdsaSigAsnParse.decode(Buffer.from(sig));
     console.log(sigDecoded)
-    return {
+    return toJose({
       r: this.leftpad(sigDecoded.r.toString('hex')),
       s: this.leftpad(sigDecoded.s.toString('hex')),
       recoveryParam: 1
-    }
+    })
   }
 
 }
