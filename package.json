@@ -9,20 +9,32 @@
     "start": "veramo server",
     "watch": "tsc -b --watch",
     "clean": "rm -rf tmp && rm database.sqlite && rm -rf build && rm tsconfig.tsbuildinfo",
-    "upgrade-veramo": "yarn add -D @veramo/cli @veramo/core @veramo/did-manager @veramo/key-manager"
+    "upgrade-veramo": "yarn add -D @veramo/cli @veramo/core @veramo/did-manager @veramo/key-manager",
+    "test": "jest",
+    "test-ci": "jest --coverage=true --maxWorkers 2"
   },
   "dependencies": {
-    "@aws-sdk/client-kms": "^3.13.1",
+    "@aws-sdk/client-kms": "^3.24.0",
     "asn1.js": "^5.4.1",
-    "uint8arrays": "^2.1.5"
+    "uint8arrays": "^2.1.10"
   },
   "devDependencies": {
-    "@aws-sdk/types": "3.13.1",
-    "@veramo/cli": "^1.2.0",
-    "@veramo/core": "^1.2.0",
-    "@veramo/did-manager": "^1.2.0",
-    "@veramo/key-manager": "^1.2.0",
-    "typescript": "^4.2.4"
+    "@aws-sdk/types": "3.22.0",
+    "@types/node-fetch": "^2.5.10",
+    "@types/jest": "^26.0.23",
+    "@veramo/cli": "^2.0.2-next.14",
+    "@veramo/core": "^2.0.2-next.14",
+    "@veramo/did-manager": "^2.0.2-next.14",
+    "@veramo/key-manager": "^2.0.2-next.14",
+    "typescript": "4.2.4",
+    "jest": "^26.6.3",
+    "jest-extended": "^0.11.5",
+    "jest-fetch-mock": "^3.0.3",
+    "prettier": "^2.2.1",
+    "pretty-quick": "^3.1.0",
+    "@stablelib/ed25519": "^1.0.2",
+    "@ethersproject/bytes": "^5.1.0",
+    "ts-jest": "^26.5.0"
   },
   "files": [
     "build/**/*"
