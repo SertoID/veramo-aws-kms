@@ -4,6 +4,7 @@
   "source": "src/index.ts",
   "main": "build/index.js",
   "types": "build/index.d.ts",
+  "license": "Apache-2.0",
   "scripts": {
     "build": "tsc",
     "start": "veramo server",
@@ -26,5 +27,9 @@
   },
   "files": [
     "build/**/*"
+  ],
+  "author": "Aldi Gjoka <aldi.gjoka@mesh.xyz >",
+  "contributors": [
+    "Italo Borssatto <italo.borssatto@mesh.xyz>"
   ]
 }
